@@ -1,88 +1,69 @@
-#  Singly Linked List : Find the Middle Node of a Singly Linked List Using Recursion
+#  Singly Linked List-To Search an Element in a Linked List
 
-This Python program demonstrates how to find the middle node of a singly linked list using recursion. The program calculates the middle element by utilizing two pointers, with one pointer moving one step at a time (slow) and the other moving two steps at a time (fast). When the fast pointer reaches the end of the list, the slow pointer will be at the middle node.
+This project contains a simple implementation of a **singly linked list** in Python, allowing insertion and searching of elements.
 
 
 ##  Aim
 
-To write a Python program that:
-- Creates a singly linked list.
-- Uses recursion to find the middle node of the list.
-- In case of an even number of nodes, it returns the second middle element.
+To write a Python program to search for a given element in a singly linked list using object-oriented programming principles.
+
 
 ##  Algorithm
 
-1. **Node Class**: 
-   - Define a `Node` class to represent each node in the singly linked list. Each node has two attributes: `data` and `next`.
-   
-2. **LinkedList Class**:
-   - Define a `LinkedList` class that manages the linked list with methods to:
-     - `append(data)`: Add a new node to the end of the list.
-     - `get_middle_recursive(slow, fast)`: A recursive helper function to find the middle node using two pointers (slow and fast).
-     - `find_middle()`: A method to call the recursive function and return the middle node's data.
-
-3. **Input**:
-   - First, the program reads an integer `n`, representing the number of elements in the linked list.
-   - Then, it reads `n` space-separated integers to form the linked list.
-
-4. **Recursive Middle Finding**:
-   - The `get_middle_recursive` method uses two pointers to traverse the list:
-     - The `slow` pointer moves one step at a time.
-     - The `fast` pointer moves two steps at a time.
-   - When the `fast` pointer reaches the end, the `slow` pointer will be at the middle node.
-
-5. **Output**:
-   - The program prints the middle element. If the list has an even number of nodes, it returns the second middle element.
+1. **Define a Node class** with `data` and `next` attributes.
+2. **Define a LinkedList class** with:
+   - A `head` pointer initialized to `None`.
+   - A `push()` method to add elements at the beginning.
+   - A `search()` method to check whether a given value exists.
+3. Create a `LinkedList` instance.
+4. Insert the elements **10, 30, 11, 21, 14** using `push()` (which results in reverse order).
+5. Read an integer input from the user.
+6. Use `search()` to check if the element exists in the list.
+7. Output **"Yes"** if found, else **"No"**.
 
 
-
-## Program
+##  Program
 ```
 class Node:
     def __init__(self, data):
         self.data = data
         self.next = None
-
+ 
 class LinkedList:
     def __init__(self):
         self.head = None
+ 
+    def push(self, new_data):
+        new_node = Node(new_data)
+        new_node.next = self.head
+        self.head = new_node
+ 
+    def search(self, x):
+        current = self.head
+        while current != None:
+            if current.data == x:
+                return True
+             
+            current = current.next
+        return False
+ 
+llist = LinkedList()
+ 
+llist.push(10);
+llist.push(30);
+llist.push(11);
+llist.push(21);
+llist.push(14);
 
-    def append(self, data):
-        new_node = Node(data)
-        if not self.head:
-            self.head = new_node
-            return
-        temp = self.head
-        while temp.next:
-            temp = temp.next
-        temp.next = new_node
-
-    def get_middle_recursive(self, slow, fast):
-        if fast is None or fast.next is None:
-            return slow
-        return self.get_middle_recursive(slow.next, fast.next.next)
-
-    def find_middle(self):
-        if not self.head:
-            return None
-        middle_node = self.get_middle_recursive(self.head, self.head)
-        return middle_node.data
-
-n = int(input())
-values = list(map(int, input().split()))
-
-ll = LinkedList()
-for val in values:
-    ll.append(val)
-
-print(ll.find_middle())
+data = int(input())
+if llist.search(data):
+    print("Yes")
+else:
+    print("No")
 ```
-## Sample Input & Output
-![image](https://github.com/user-attachments/assets/139e9c65-552f-494a-8acb-ab764b6f271b)
 
-![image](https://github.com/user-attachments/assets/3753d1d1-cf65-43e3-a173-b5da992eae19)
-
+## Sample Output
+![image](https://github.com/user-attachments/assets/6e172e13-1d98-4e85-9b65-0f583ef5d48a)
 
 ## Result
-Thus, the output is verified.
 Thus, the program is verified successfully.
